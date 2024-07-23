@@ -12,6 +12,7 @@ namespace TestProject.Models
         [Required(ErrorMessage = "Last Name is required")]
         public string LastName { get; set; }
 
+        [Key]
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }

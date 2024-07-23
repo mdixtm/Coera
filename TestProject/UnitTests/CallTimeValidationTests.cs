@@ -5,6 +5,7 @@ using TestProject.Validators;
 
 namespace UnitTests
 {
+    [TestFixture]
     public class CallTimeValidationTests
     {
         [Test]
