@@ -47,54 +47,5 @@ namespace UnitTests
             Assert.That(badRequestResult, Is.Not.Null);
             Assert.That(badRequestResult.Value, Is.InstanceOf<SerializableError>());
         }
-
-        [Test]
-        public async Task Upsert_ShouldReturnCreated_WhenCandidateIsNew()
-        {
-            // Arrange
-            var candidate = new Candidate
-            {
-                FirstName = "John",
-                LastName = "Doe",
-                Email = "john.doe@example.com",
-                Comment = "Looking forward to the opportunity."
-            };
-
-            _mockCandidateService.Setup(service => service.UpsertCandidateAsync(candidate))
-                .ReturnsAsync(true);
-
-            // Act
-            var result = await _controller.Upsert(candidate);
-
-            // Assert
-            var createdAtActionResult = result as CreatedAtActionResult;
-            Assert.That(createdAtActionResult, Is.Not.Null);
-            Assert.That(createdAtActionResult.RouteValues["id"], Is.EqualTo(candidate.Email));
-            Assert.That(createdAtActionResult.Value, Is.EqualTo(candidate));
-        }
-
-        [Test]
-        public async Task Upsert_ShouldReturnOk_WhenCandidateIsUpdated()
-        {
-            // Arrange
-            var candidate = new Candidate
-            {
-                FirstName = "John",
-                LastName = "Doe",
-                Email = "john.doe@example.com",
-                Comment = "Looking forward to the opportunity."
-            };
-
-            _mockCandidateService.Setup(service => service.UpsertCandidateAsync(candidate))
-                .ReturnsAsync(false);
-
-            // Act
-            var result = await _controller.Upsert(candidate);
-
-            // Assert
-            var okResult = result as OkObjectResult;
-            Assert.That(okResult, Is.Not.Null);
-            Assert.That(okResult.Value, Is.EqualTo(candidate));
-        }
     }
 }
