@@ -24,19 +24,19 @@ namespace TestProject.Validators
 
             if (startTime.HasValue && !endTime.HasValue)
             {
-                return new ValidationResult("Best call end time is required if start time is provided");
+                return new ValidationResult("Call end time is required if start time is provided");
             }
 
             if (!startTime.HasValue && endTime.HasValue)
             {
-                return new ValidationResult("Best call start time is required if end time is provided");
+                return new ValidationResult("Call start time is required if end time is provided");
             }
 
             if (startTime.HasValue && endTime.HasValue)
             {
                 if (endTime.Value <= startTime.Value)
                 {
-                    return new ValidationResult("Best call end time must be after start time");
+                    return new ValidationResult("Call end time must be after start time");
                 }
             }
 
